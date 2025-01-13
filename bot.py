@@ -46,9 +46,16 @@ apis = {
 }
 
 gaslinks = {
-"ExcelGoogleSheets\nhttps://www.youtube.com/@ExcelGoogleSheets/search?query=apps%20script\n",
-"Ben Collins's\nhttps://courses.benlcollins.com/p/apps-script-blastoff\n",
-"Spencer Farris\nhttps://www.youtube.com/playlist?list=PLmE9Sui7JoQGqOJvhxYRjOFUtr5kMWUtJ\n",
+"ExcelGoogleSheets\n<https://www.youtube.com/@ExcelGoogleSheets/search?query=apps%20script>\n",
+"Ben Collins\n<https://courses.benlcollins.com/p/apps-script-blastoff>\n",
+"Spencer Farris\n<https://www.youtube.com/playlist?list=PLmE9Sui7JoQGqOJvhxYRjOFUtr5kMWUtJ>\n",
+}
+
+notablelinks = {
+    "[Advanced Dropdown Setups](<https://docs.google.com/spreadsheets/d/1OlRIXjoaUG5Owjd3t9hGfmV7G8EmAKffP7YVPdNGNH0/edit?usp=sharing>)\n",
+    "[A History of Crash Bugs](<https://docs.google.com/spreadsheets/d/107B_jSpObwxxYfL_HTBWZtB9cnMQDTraoirpaRUsNLc/edit?gid=582260365#gid=582260365>)\n",
+    "[Community Practice Problems](<https://docs.google.com/spreadsheets/d/1RZVTUJj_qzugq_WCd7rMjmjzKtUM72Jb5x0RGFAVNnk/edit?gid=890374412#gid=890374412>)\n",
+
 }
 
 commands = {
@@ -59,8 +66,10 @@ commands = {
     "wiki": "You can find our wiki [here](https://sheets.wiki/)!",
     "practice": "Here's a [practice sheet](https://docs.google.com/spreadsheets/d/1RZVTUJj_qzugq_WCd7rMjmjzKtUM72Jb5x0RGFAVNnk/edit?gid=890374412) for intermediate formulae!",
     "timestamp": "[Here is a video](https://www.youtube.com/watch?v=DgqTftdXkTw) by the amazing Dralkyr for timestamping on edit!",
-    "apis" : "We have some Apis for in-sheet examples use =IMPORTDATA(\"https://aliafriend.com/api/sheets/examples/<endpoint>\") endpoints include:\n```" + '\n'.join([f"\n{api}" for api in apis]) + "\n```",
+    "apis" : "```We have some Apis for in-sheet examples! Endpoints include:\n" + '\n'.join([f"\n=IMPORTDATA(\"https://aliafriend.com/api/sheets/examples/{api}\")" for api in apis]) + "\n```",
     "learngas" : "Here are some links to start learning Google App Script!\n\n" + '\n'.join([f"\n{link}" for link in gaslinks]),
+    "links" : "Spreadsheet Collection\n\n" + '\n'.join([f"{link}" for link in notablelinks]),
+    "ddropdowns" : "Here is a video on how to create dependant dropdowns by the amazing Dralkyr!\n<https://www.youtube.com/watch?v=fHfVF5AaAjc>\n\nWe also have a sheet!\n[Advanced Dropdown Setups](<https://docs.google.com/spreadsheets/d/1OlRIXjoaUG5Owjd3t9hGfmV7G8EmAKffP7YVPdNGNH0/edit?usp=sharing>)\n"
 }
 
 commands['help'] = "I can provide information on Excel and Google Sheets functions! Try `/excel` or `/gsheets` followed by the name of a function. You can also use `/search` followed by a search query to find a relevant article on the Sheets Wiki. Other commands include:\n```" + '\n'.join([f"\n/{command}" for command in commands]) + "\n```"
@@ -124,7 +133,7 @@ async def on_message(message):
         else:
             await message.channel.send("Sorry, I don't recognize that command.")
 
-
+@app_commands.user_install
 @tree.command(
     name='search',
     description='Search for an article on Sheets.wiki.')
@@ -132,6 +141,7 @@ async def search_command(ctx, *, query: str):
     result = search(query)
     await ctx.response.send_message(result)
 
+@app_commands.user_install
 @tree.command(
     name='excel',
     description='Search for an Excel function.')
@@ -145,6 +155,7 @@ async def search_command(ctx, *, query: str):
     else:
         await ctx.response.send_message("That function isn't available!")
 
+@app_commands.user_install
 @tree.command(
     name='gsheets',
     description='Search for an gsheets function.')
@@ -158,6 +169,8 @@ async def search_command(ctx, *, query: str):
     else:
         await ctx.response.send_message("That function isn't available!")
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='help',
     description="Information regarding usage of the bot"
@@ -165,6 +178,8 @@ async def search_command(ctx, *, query: str):
 async def help_command(ctx):
     await ctx.response.send_message(commands['help'])
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='mockup',
     description= "Create an anonymous mock-up"
@@ -172,6 +187,8 @@ async def help_command(ctx):
 async def mockup_command(ctx):
     await ctx.response.send_message(commands['mockup'])
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='data',
     description= "Don't ask to ask"
@@ -179,6 +196,8 @@ async def mockup_command(ctx):
 async def data_command(ctx):
     await ctx.response.send_message(commands['data'])
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='xy',
     description= "Your problem may be an XY problem"
@@ -186,6 +205,8 @@ async def data_command(ctx):
 async def xy_command(ctx):
     await ctx.response.send_message(commands['xy'])
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='structure',
     description= "Advice on properly formatting your data"
@@ -193,6 +214,8 @@ async def xy_command(ctx):
 async def structure_command(ctx):
     await ctx.response.send_message(commands['structure'])
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='wiki',
     description= "The Sheets Wiki"
@@ -200,6 +223,8 @@ async def structure_command(ctx):
 async def wiki_command(ctx):
     await ctx.response.send_message(commands['wiki'])
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='practice',
     description= "A practice sheet for intermediate formulae!"
@@ -207,6 +232,8 @@ async def wiki_command(ctx):
 async def practice_command(ctx):
     await ctx.response.send_message(commands['practice'])
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='timestamp',
     description= "How to timestamp edits"
@@ -214,6 +241,8 @@ async def practice_command(ctx):
 async def timestamp_command(ctx):
     await ctx.response.send_message(commands['timestamp'])
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='apis',
     description= "Information on the available Api's"
@@ -221,6 +250,8 @@ async def timestamp_command(ctx):
 async def apis_command(ctx):
     await ctx.response.send_message(commands['apis'])
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='localediff',
     description= "Fix locale differences"
@@ -234,12 +265,32 @@ async def localdiff_command(ctx, *, input_text: str):
     # Send the updated text back
     await ctx.response.send_message(f"Your Locale is different. You'll need to replace your , with ; \n\n```\n{updated_text}\n```")
 
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='learngas',
     description= "Learn Google Apps Script Links"
 )
 async def learngas_command(ctx):
     await ctx.response.send_message(commands['learngas'])
+
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
+@tree.command(
+    name='links',
+    description= "Notable Links From Our Collection."
+)
+async def links_command(ctx):
+    await ctx.response.send_message(commands['links'])
+
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
+@tree.command(
+    name='ddropdowns',
+    description= "How to create dependant dropdowns"
+)
+async def ddropdowns_command(ctx):
+    await ctx.response.send_message(commands['ddropdowns'])
 
 @client.event
 async def on_ready():
