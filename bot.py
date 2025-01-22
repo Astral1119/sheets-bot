@@ -55,7 +55,7 @@ notablelinks = {
     "[Advanced Dropdown Setups](<https://docs.google.com/spreadsheets/d/1OlRIXjoaUG5Owjd3t9hGfmV7G8EmAKffP7YVPdNGNH0/edit?usp=sharing>)\n",
     "[A History of Crash Bugs](<https://docs.google.com/spreadsheets/d/107B_jSpObwxxYfL_HTBWZtB9cnMQDTraoirpaRUsNLc/edit?gid=582260365#gid=582260365>)\n",
     "[Community Practice Problems](<https://docs.google.com/spreadsheets/d/1RZVTUJj_qzugq_WCd7rMjmjzKtUM72Jb5x0RGFAVNnk/edit?gid=890374412#gid=890374412>)\n",
-
+    "[LAMBDA Limits](https://docs.google.com/spreadsheets/d/160UfdYEOoplAaKzm4Cx4rF0NNWwd6b2KC3LH3xAr-jk/edit?gid=0#gid=0)\n",
 }
 
 commands = {
@@ -287,7 +287,7 @@ async def links_command(ctx):
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @tree.command(
     name='ddropdowns',
-    description= "How to create dependant dropdowns"
+    description= "How to create dependent dropdowns"
 )
 async def ddropdowns_command(ctx):
     await ctx.response.send_message(commands['ddropdowns'])
