@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 import sqlite3
 
 class Functions(commands.Cog):
@@ -9,6 +10,8 @@ class Functions(commands.Cog):
         self.c = self.db.cursor()
 
     @commands.hybrid_command(name='gsheets')
+    @app_commands.allowed_installs(guilds=True, users=True)
+    @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def gsheets(self, ctx, command):
         # clean
         command = command.upper()
@@ -35,6 +38,8 @@ class Functions(commands.Cog):
         await ctx.send(embed=embed)
     
     @commands.hybrid_command(name='excel')
+    @app_commands.allowed_installs(guilds=True, users=True)
+    @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def excel(self, ctx, command):
         # clean
         command = command.upper()

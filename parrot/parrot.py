@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 import json
 import os
 
@@ -18,6 +19,8 @@ class Parrot(commands.Cog):
         with open(f'parrot/{command_name}.json') as f:
             command_data = json.load(f)
 
+        @app_commands.allowed_installs(guilds=True, users=True)
+        @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
         async def parrot(ctx):
             description = "\n".join(f'**{label}**: {desc}' for label, desc in command_data.items())
             embed = discord.Embed(
