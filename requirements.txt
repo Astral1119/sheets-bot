@@ -1,0 +1,9 @@
+# These are for the scraper
+# The scraper is currently out of commission
+# lxml
+# requests
+# beautifulsoup4
+# tqdm 
+
+python-dotenv
+discord.py

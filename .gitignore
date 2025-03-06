@@ -1,0 +1,5 @@
+.DS_Store
+.env
+venv
+scrape_functions.py
+*/__pycache__/*
