@@ -3,3 +3,4 @@
 venv
 scrape_functions.py
 */__pycache__/*
+wiki/index/
