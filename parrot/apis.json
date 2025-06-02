@@ -1,7 +1,0 @@
-{
-    "map": " Returns an example of map function usage within Google Sheets",
-    "scan": "Returns an example of scan function usage within Google Sheets",
-    "reduce": "Returns an example of reduce function usage within Google Sheets",
-    "lambda": "Returns an example of using lambda within Google Sheets",
-    "documentation": "Returns how to use let to incorporate documentation in your formulas for Google Sheets"
-}
