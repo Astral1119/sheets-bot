@@ -23,6 +23,11 @@ command_list = {
         [A History of Crash Bugs](https://docs.google.com/spreadsheets/d/107B_jSpObwxxYfL_HTBWZtB9cnMQDTraoirpaRUsNLc/edit?gid=582260365#gid=582260365)
         [Community Practice Problems](https://docs.google.com/spreadsheets/d/1RZVTUJj_qzugq_WCd7rMjmjzKtUM72Jb5x0RGFAVNnk/edit?gid=890374412#gid=890374412)
         """,
+    "about":
+        """
+        [Spreadsheet Bot](https://github.com/Astral1119/sheets-bot) is a Discord bot designed to assist users with Google Sheets and Excel-related tasks.
+        If you have any questions or need help using the bot, feel free to reach out to astral.cafe.
+        """,
 }
 
 import discord
