@@ -1,6 +1,7 @@
 import discord
 from whoosh.index import open_dir
-from whoosh.qparser import QueryParser
+from whoosh.qparser import QueryParser, MultifieldParser
+from whoosh import scoring
 from discord.ext import commands
 from discord import app_commands
 
@@ -41,9 +42,10 @@ class WikiSearch(commands.Cog):
             await ctx.send("Please provide a search query.")
             return
         
-        with self.ix.searcher() as searcher:
-            query_parser = QueryParser("content", self.ix.schema)
+        with self.ix.searcher(weighting=scoring.BM25F()) as searcher:
+            query_parser = MultifieldParser(["title", "content"], self.ix.schema, fieldboosts={"title": 5.0})
             parsed_query = query_parser.parse(query)
+
             results = searcher.search(parsed_query, limit=5)
 
             if not results:

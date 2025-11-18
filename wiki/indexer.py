@@ -1,28 +1,24 @@
-# define schema
+import os.path
+import os
+from whoosh.index import create_in, open_dir
 from whoosh.fields import Schema, TEXT
 
+# define schema
 schema = Schema(
-    title=TEXT(stored=True),
+    title=TEXT(stored=True, field_boost=5.0),
     content=TEXT,
     url=TEXT(stored=True)
 )
 
 # create index directory if it doesn't exist
-import os.path
-from whoosh.index import create_in
-
 if not os.path.exists("index"):
     os.mkdir("index")
 ix = create_in("index", schema)
 
 # add documents to the index
-from whoosh.index import open_dir
-
 ix = open_dir("index")
 
 writer = ix.writer()
-
-import os
 
 # import all articles from ./articles
 def index_articles():
